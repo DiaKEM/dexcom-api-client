@@ -1,1 +1,1 @@
-declare const someVariable = "Test variable";
+export * from './client';
