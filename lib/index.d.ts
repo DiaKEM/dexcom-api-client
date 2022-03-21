@@ -1,1 +1,1 @@
-declare const someVariable = "Test variable";
+declare const someVariable = 'Test variable';
