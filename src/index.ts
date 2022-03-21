@@ -1,1 +1,1 @@
-console.log('Initialize project');
+const someVariable = 'Test variable';

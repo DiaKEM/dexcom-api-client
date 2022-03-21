@@ -18,7 +18,7 @@
     "lint": "eslint --fix --ext .js,.ts ./src",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "prepare": "husky install",
-    "release": "release-it"
+    "release": "npm run build && release-it"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.3",
