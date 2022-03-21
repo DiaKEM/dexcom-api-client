@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Dexcom API client to communicate and retrieve data from the sharing service.",
   "main": "lib/index.js",
+  "types": "./lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
     "ts:type-check": "tsc --noEmit",
     "ts:type-check:watch": "npm run type-check -- --watch",
