@@ -45,5 +45,8 @@
     "typescript": "^3.9.10"
   },
   "author": "Selcuk Kekec",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.26.1"
+  }
 }
