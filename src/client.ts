@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { transform, validate } from './utils';
+import schedule from 'node-schedule';
+import { CGMDataType, transform, validate } from './utils';
 
 const APPLICATION_ID = 'd89443d2-327c-4a6f-89e5-496bbb0317db';
 
@@ -54,7 +55,7 @@ export const DexcomApiClient = ({
     }
   };
 
-  const loginAndTry = async <T>(func: () => Promise<T> | T | boolean) => {
+  const loginAndTry = async <T>(func: () => Promise<T> | T) => {
     let response = null;
 
     if (!sessionId) await login();
@@ -70,8 +71,8 @@ export const DexcomApiClient = ({
     return response;
   };
 
-  const read = async (minutesAgo = 1440, count = 288) =>
-    loginAndTry<string>(async () => {
+  const read = async (minutesAgo = 1440, count = 288): Promise<CGMDataType[]> =>
+    loginAndTry<CGMDataType[]>(async () => {
       const params = {
         sessionId,
         minutes: minutesAgo,
@@ -87,8 +88,50 @@ export const DexcomApiClient = ({
       return response.data.map(transform);
     });
 
+  const readLast = async () => read(9999, 1);
+
+  type ObserverInputType = {
+    maxAttempts?: number;
+    delay?: number;
+    listener: (data: CGMDataType) => void;
+  };
+  const observe = async ({
+    maxAttempts = 50,
+    delay = 1000,
+    listener,
+  }: ObserverInputType) => {
+    const [data] = await readLast();
+    const rawMinutes = data.date.getMinutes();
+    const a = String(rawMinutes).padStart(2, '0')[1];
+    const b = String(rawMinutes + 5).padStart(2, '0')[1];
+    const runPoints = ['0', '1', '2', '3', '4', '5'].reduce<string[]>(
+      (acc, e) => [...acc, e + a, e + b],
+      []
+    );
+    const proc = () => {
+      let attempt = 0;
+      const interval = setInterval(async () => {
+        if (attempt >= maxAttempts) {
+          clearInterval(interval);
+        }
+
+        const lastCgmData = await read(1, 1);
+
+        if (lastCgmData.length) {
+          listener.apply(null, [lastCgmData[0]]);
+          clearInterval(interval);
+        }
+        attempt += 1;
+      }, delay);
+    };
+    const job = schedule.scheduleJob(`${runPoints.join(',')} * * * *`, proc);
+
+    return job;
+  };
   return {
     login,
     read,
+    readLast,
+    observe,
   };
 };

@@ -33,3 +33,24 @@ type CGMDataType = {
   trend: DexcomTrendType;
 };
 ```
+
+## Observer
+
+This is a very performant way of retrieving data from the sharing server. 
+The procedure will therefore calculate the specific recurring time points in which data is expected. In general there will be 5 minutes in between.
+After that calculation the procedure will be run only if data is expected. 
+If this timepoint is reached the most recent value will be retrieved from the servers. 
+The value should be present in a defined range. Otherwise the retrieval will be postponed to the next run.
+
+```
+await observe({
+    // Maximum attempts to get the next value
+    maxAttempts: 50,
+    // Delay between attempts in ms
+    delay: 2000,
+    // Listener to be invoked
+    listener: cgmData => {
+      console.log('DATA RECEIVED', cgmData, new Date());
+    },
+});
+```

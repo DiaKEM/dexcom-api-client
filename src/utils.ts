@@ -16,7 +16,7 @@ type DexcomDataType = {
   Trend: DexcomTrendType;
 };
 
-type CGMDataType = {
+export type CGMDataType = {
   date: Date;
   value: number;
   trend: DexcomTrendType;

@@ -47,6 +47,7 @@
   "author": "Selcuk Kekec",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.26.1"
+    "axios": "^0.26.1",
+    "node-schedule": "^2.1.0"
   }
 }
