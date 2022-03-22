@@ -124,9 +124,8 @@ export const DexcomApiClient = ({
         attempt += 1;
       }, delay);
     };
-    const job = schedule.scheduleJob(`${runPoints.join(',')} * * * *`, proc);
 
-    return job;
+    return schedule.scheduleJob(`${runPoints.join(',')} * * * *`, proc);
   };
   return {
     login,
