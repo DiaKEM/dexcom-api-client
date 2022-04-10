@@ -3,9 +3,9 @@
   "version": "0.1.2",
   "description": "Dexcom API client to communicate and retrieve data from the sharing service.",
   "main": "lib/index.js",
-  "types": "./lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "lib/**/*"
   ],
   "scripts": {
     "ts:type-check": "tsc --noEmit",
@@ -16,7 +16,7 @@
     "start": "babel-watch --extensions \".ts\" src/index.ts",
     "debug": "babel-watch --inspect 0.0.0.0:9229 --extensions \".ts\" src/index.ts",
     "lint": "eslint --fix --ext .ts ./src",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(ts|json)\"",
+    "format": "prettier --ignore-path .gitignore --write \"src/**/*.+(ts|json)\"",
     "prepare": "husky install",
     "release": "release-it"
   },
