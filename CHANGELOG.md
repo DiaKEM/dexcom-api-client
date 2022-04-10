@@ -1,6 +1,6 @@
 
 
-## [0.1.3](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.2...0.1.3) (2022-04-10)
+## [0.1.4](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.3...0.1.4) (2022-04-10)## [0.1.3](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.2...0.1.3) (2022-04-10)
 
 
 ### Bug Fixes
