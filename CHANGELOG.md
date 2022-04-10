@@ -1,6 +1,11 @@
 
 
-## [0.1.2](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.1...0.1.2) (2022-03-22)
+## [0.1.3](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.2...0.1.3) (2022-04-10)
+
+
+### Bug Fixes
+
+* lib folder removed from git ([108e9ad](https://github.com/DiaKEM/dexcom-api-client/commit/108e9ad814b9bad6544f1e4ea8706fd4ce3fc0e3))## [0.1.2](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.1...0.1.2) (2022-03-22)
 
 ## [0.1.1](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.0...0.1.1) (2022-03-22)
 * chore: ts fixed (75fcb83)
