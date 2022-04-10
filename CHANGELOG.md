@@ -1,6 +1,6 @@
 
 
-## [0.1.2] (https://github.com/DiaKEM/dexcom-api-client/compare/0.1.1...0.1.2) (2022-03-22)
+## [0.1.2](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.1...0.1.2) (2022-03-22)
 
 ## [0.1.1](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.0...0.1.1) (2022-03-22)
 * chore: ts fixed (75fcb83)
