@@ -48,8 +48,6 @@ export const DexcomApiClient = ({
       }
 
       sessionId = responses[1].data;
-
-      console.log('Logged in successfully', sessionId);
     } catch (e) {
       throw new Error('Unable to login in');
     }
