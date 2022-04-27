@@ -7,7 +7,8 @@ type DexcomTrendType =
   | 'Flat'
   | 'FortyFiveUp'
   | 'SingleUp'
-  | 'DoubleUp';
+  | 'DoubleUp'
+  | 'NotComputable';
 type DexcomDataType = {
   WT: string;
   ST: string;
