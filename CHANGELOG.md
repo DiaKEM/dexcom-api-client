@@ -1,6 +1,11 @@
 
 
-## [0.1.5](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.4...0.1.5) (2022-04-10)
+## [0.1.6](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.5...0.1.6) (2022-04-27)
+
+
+### Bug Fixes
+
+* missing dexcom trend added ([6839674](https://github.com/DiaKEM/dexcom-api-client/commit/68396748e112ec87f343157eeb479aacdbdf122c))## [0.1.5](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.4...0.1.5) (2022-04-10)
 
 
 ### Bug Fixes
