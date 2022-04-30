@@ -1,5 +1,12 @@
 
 
+# [0.2.0](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.6...0.2.0) (2022-04-30)
+
+
+### Features
+
+* provide converted presentation for mmol and mgdl (closes [#4](https://github.com/DiaKEM/dexcom-api-client/issues/4)) ([eb043dd](https://github.com/DiaKEM/dexcom-api-client/commit/eb043dd4171ebac190aba32467cc237f15f5e5dc))
+
 ## [0.1.6](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.5...0.1.6) (2022-04-27)
 
 
