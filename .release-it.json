@@ -9,6 +9,7 @@
     "@release-it/conventional-changelog": {
       "preset": "angular",
       "infile": "CHANGELOG.md",
+      "header": "# Changelog",
       "gitRawCommitsOpts": {
         "merges": null
       }

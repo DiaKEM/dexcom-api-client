@@ -2,7 +2,6 @@
 
 # [0.2.0](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.6...0.2.0) (2022-04-30)
 
-
 ### Features
 
 * provide converted presentation for mmol and mgdl (closes [#4](https://github.com/DiaKEM/dexcom-api-client/issues/4)) ([eb043dd](https://github.com/DiaKEM/dexcom-api-client/commit/eb043dd4171ebac190aba32467cc237f15f5e5dc))
@@ -12,18 +11,24 @@
 
 ### Bug Fixes
 
-* missing dexcom trend added ([6839674](https://github.com/DiaKEM/dexcom-api-client/commit/68396748e112ec87f343157eeb479aacdbdf122c))## [0.1.5](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.4...0.1.5) (2022-04-10)
+* missing dexcom trend added ([6839674](https://github.com/DiaKEM/dexcom-api-client/commit/68396748e112ec87f343157eeb479aacdbdf122c))
 
+## [0.1.5](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.4...0.1.5) (2022-04-10)
 
 ### Bug Fixes
 
 * console.log finally removed from client.ts ([5a3ea76](https://github.com/DiaKEM/dexcom-api-client/commit/5a3ea7637c02a84c6083ead15bb9b5fa9e508a17))
-* readme extended and lib folder added to .gitignore ([d7c54dc](https://github.com/DiaKEM/dexcom-api-client/commit/d7c54dce11946d5a7de88203db086c440da1f538))## [0.1.4](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.3...0.1.4) (2022-04-10)## [0.1.3](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.2...0.1.3) (2022-04-10)
+* readme extended and lib folder added to .gitignore ([d7c54dc](https://github.com/DiaKEM/dexcom-api-client/commit/d7c54dce11946d5a7de88203db086c440da1f538))
 
+## [0.1.4](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.3...0.1.4) (2022-04-10)
+
+## [0.1.3](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.2...0.1.3) (2022-04-10)
 
 ### Bug Fixes
 
-* lib folder removed from git ([108e9ad](https://github.com/DiaKEM/dexcom-api-client/commit/108e9ad814b9bad6544f1e4ea8706fd4ce3fc0e3))## [0.1.2](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.1...0.1.2) (2022-03-22)
+* lib folder removed from git ([108e9ad](https://github.com/DiaKEM/dexcom-api-client/commit/108e9ad814b9bad6544f1e4ea8706fd4ce3fc0e3))
+
+## [0.1.2](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.1...0.1.2) (2022-03-22)
 
 ## [0.1.1](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.0...0.1.1) (2022-03-22)
 * chore: ts fixed (75fcb83)
