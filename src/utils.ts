@@ -20,9 +20,18 @@ type DexcomDataType = {
 export type CGMDataType = {
   date: Date;
   value: number;
+  converted: number;
   trend: DexcomTrendType;
 };
+
+const UNIT_CONVERT = 18;
+
+export const toMgDl = (value: number) => value / UNIT_CONVERT;
+export const toMmol = (value: number) => value * UNIT_CONVERT;
+export const isMgDl = (value: number) => toMgDl(value) > 1;
+
 export const transform = (input: DexcomDataType): CGMDataType => {
+  const { Value: value, Trend: trend } = input;
   const parsedDate = input.WT.match(/Date\(([0-9]*)\)/);
 
   if (!parsedDate || !Array.isArray(parsedDate) || !parsedDate[1]) {
@@ -31,8 +40,9 @@ export const transform = (input: DexcomDataType): CGMDataType => {
 
   return {
     date: new Date(parseInt(parsedDate[1], 10)),
-    value: input.Value,
-    trend: input.Trend,
+    value,
+    trend,
+    converted: isMgDl(value) ? toMmol(value) : toMgDl(value),
   };
 };
 
