@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import schedule from 'node-schedule';
-import { CGMDataType, transform, validate } from './utils';
+import schedule, { Job } from 'node-schedule';
+import { CGMDataType, transform, validate, getLogger } from './utils';
 
 const APPLICATION_ID = 'd89443d2-327c-4a6f-89e5-496bbb0317db';
 
@@ -9,6 +9,7 @@ type DexcomApiClientType = {
   password: string;
   server: 'US' | 'EU';
   clientOpts?: AxiosRequestConfig;
+  debug?: boolean;
 };
 
 export const DexcomApiClient = ({
@@ -16,6 +17,7 @@ export const DexcomApiClient = ({
   password,
   server,
   clientOpts,
+  debug = false,
 }: DexcomApiClientType) => {
   const targetServer =
     server === 'EU' ? 'shareous1.dexcom.com' : 'share2.dexcom.com';
@@ -29,6 +31,7 @@ export const DexcomApiClient = ({
     },
     ...clientOpts,
   });
+  const logger = getLogger(debug);
 
   const login = async () => {
     const payload = {
@@ -38,12 +41,14 @@ export const DexcomApiClient = ({
     };
 
     try {
+      logger(`Trying to login with credentials ${username}:********`);
       const responses = await Promise.all([
         client.post('/General/AuthenticatePublisherAccount', payload),
         client.post('/General/LoginPublisherAccountByName', payload),
       ]);
 
       if (responses.some(e => !validate(e))) {
+        logger('Login failed');
         throw new Error('Login failed.');
       }
 
@@ -76,13 +81,13 @@ export const DexcomApiClient = ({
         minutes: minutesAgo,
         maxCount: count,
       };
-
+      logger('Reading CGM data...');
       const response = await client.post(
         '/Publisher/ReadPublisherLatestGlucoseValues',
         null,
         { params }
       );
-
+      logger('Data successfully retrieved');
       return response.data.map(transform);
     });
 
@@ -93,38 +98,74 @@ export const DexcomApiClient = ({
     delay?: number;
     listener: (data: CGMDataType) => void;
   };
+
+  let job: Job | null = null;
+
   const observe = async ({
     maxAttempts = 50,
     delay = 1000,
     listener,
   }: ObserverInputType) => {
+    if (job) {
+      logger('Previous job exists - let us cancel it.');
+      job.cancel();
+    }
+
+    logger('Reading last cgm dataset...');
     const [data] = await readLast();
+    logger(`Last cgm dataset: ${JSON.stringify(data)}`);
+    logger(`Extracting minute information from ${data.date}...`);
     const rawMinutes = data.date.getMinutes();
     const a = String(rawMinutes).padStart(2, '0')[1];
     const b = String(rawMinutes + 5).padStart(2, '0')[1];
+    logger(
+      `Extraction successfull - ${a} and ${b} are our minute informations.`
+    );
     const runPoints = ['0', '1', '2', '3', '4', '5'].reduce<string[]>(
       (acc, e) => [...acc, e + a, e + b],
       []
     );
+    logger(`Calculated time points: ${JSON.stringify(runPoints)}`);
+    logger('Preparation done! Let us wait for new incoming data.');
     const proc = () => {
       let attempt = 0;
       const interval = setInterval(async () => {
+        logger(`-------- Attempt ${attempt} of ${maxAttempts} --------`);
         if (attempt >= maxAttempts) {
+          logger(
+            'Maximum attempts reached - aborting current process and restarting it to recalculate specific runpoints.'
+          );
           clearInterval(interval);
+          observe({
+            maxAttempts,
+            delay,
+            listener,
+          });
+
+          return;
         }
 
+        logger('Trying to retrieve new cgm data...');
         const lastCgmData = await read(1, 1);
 
         if (lastCgmData.length) {
+          logger('New cgm dataset is available.');
           listener.apply(null, [lastCgmData[0]]);
           clearInterval(interval);
+          logger('Sleep for 5 minutes...');
+        } else {
+          logger(`No new data available - retry in ${delay}`);
         }
+
         attempt += 1;
       }, delay);
     };
 
-    return schedule.scheduleJob(`${runPoints.join(',')} * * * *`, proc);
+    job = schedule.scheduleJob(`${runPoints.join(',')} * * * *`, proc);
+
+    return job;
   };
+
   return {
     login,
     read,

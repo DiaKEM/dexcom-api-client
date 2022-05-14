@@ -26,9 +26,9 @@ export type CGMDataType = {
 
 const UNIT_CONVERT = 18;
 
-export const toMgDl = (value: number) => value / UNIT_CONVERT;
-export const toMmol = (value: number) => value * UNIT_CONVERT;
-export const isMgDl = (value: number) => toMgDl(value) > 1;
+export const toMmol = (value: number) => value / UNIT_CONVERT;
+export const toMgDl = (value: number) => value * UNIT_CONVERT;
+export const isMgDl = (value: number) => toMmol(value) > 1;
 
 export const transform = (input: DexcomDataType): CGMDataType => {
   const { Value: value, Trend: trend } = input;
@@ -48,3 +48,7 @@ export const transform = (input: DexcomDataType): CGMDataType => {
 
 export const validate = (payload: AxiosResponse) =>
   payload.data !== '00000000-0000-0000-0000-000000000000';
+
+export const getLogger = (debug: boolean) => (msg: string) =>
+  // eslint-disable-next-line no-console
+  debug ? console.log.call(null, msg) : null;
