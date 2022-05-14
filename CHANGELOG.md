@@ -1,5 +1,12 @@
 # Changelog
 
+# [0.3.0](https://github.com/DiaKEM/dexcom-api-client/compare/0.2.1...0.3.0) (2022-05-14)
+
+
+### Features
+
+* resynchronization procedure added ([62d75d2](https://github.com/DiaKEM/dexcom-api-client/commit/62d75d273facb9dff5a9cd9dadaac6e7f28687f1))
+
 ## [0.2.1](https://github.com/DiaKEM/dexcom-api-client/compare/0.2.0...0.2.1) (2022-04-30)
 
 # [0.2.0](https://github.com/DiaKEM/dexcom-api-client/compare/0.1.6...0.2.0) (2022-04-30)
