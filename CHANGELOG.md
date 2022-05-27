@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/DiaKEM/dexcom-api-client/compare/0.3.0...0.3.1) (2022-05-27)
+
+
+### Bug Fixes
+
+* exporting missing types ([28ea5de](https://github.com/DiaKEM/dexcom-api-client/commit/28ea5de818b87a7bd77c39f21b77346afb9c3ddb))
+
 # [0.3.0](https://github.com/DiaKEM/dexcom-api-client/compare/0.2.1...0.3.0) (2022-05-14)
 
 
