@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-type DexcomTrendType =
+export type DexcomTrendType =
   | 'DoubleDown'
   | 'SingleDown'
   | 'FortyFiveDown'
@@ -9,7 +9,7 @@ type DexcomTrendType =
   | 'SingleUp'
   | 'DoubleUp'
   | 'NotComputable';
-type DexcomDataType = {
+export type DexcomDataType = {
   WT: string;
   ST: string;
   DT: string;
@@ -24,8 +24,7 @@ export type CGMDataType = {
   trend: DexcomTrendType;
 };
 
-const UNIT_CONVERT = 18;
-
+const UNIT_CONVERT = 18.018018018;
 export const toMmol = (value: number) => value / UNIT_CONVERT;
 export const toMgDl = (value: number) => value * UNIT_CONVERT;
 export const isMgDl = (value: number) => toMmol(value) > 1;
