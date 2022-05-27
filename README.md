@@ -21,7 +21,7 @@ The client requires valid credentials to connect to Dexcom and offers to modes.
 
 The basic mode works straight-forward and gives you all the control how to interact with the service:
 
-```
+```typescript
 import { DexcomApiClient } from '@diakem/dexcom-api-client';
 
 // Initialize the client by providing credentials and server location
@@ -37,7 +37,7 @@ const cgmData = await read();
 
 This will return an array of cgm data with the following data structure:
 
-```
+```typescript
 type CGMDataType = {
   date: Date;
   value: number;
@@ -47,7 +47,7 @@ type CGMDataType = {
 
 The `DexcomTrendType` is also very simple:
 
-```
+```typescript
 type DexcomTrendType =
   | 'DoubleDown'
   | 'SingleDown'
@@ -66,7 +66,7 @@ After that calculation the procedure will be run only if data is expected.
 If this timepoint is reached the most recent value will be retrieved from the servers. 
 The value should be present in a defined range. Otherwise the retrieval will be postponed to the next run.
 
-```
+```typescript
 await observe({
     // Maximum attempts to get the next value
     maxAttempts: 50,
