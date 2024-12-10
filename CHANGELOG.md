@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/DiaKEM/dexcom-api-client/compare/0.3.1...0.3.2) (2024-12-10)
+
+
+### Bug Fixes
+
+* allow usage of admin accounts as data provider ([e857d52](https://github.com/DiaKEM/dexcom-api-client/commit/e857d52de09aaf614da24a023956d92d0201b12a))
+
 ## [0.3.1](https://github.com/DiaKEM/dexcom-api-client/compare/0.3.0...0.3.1) (2022-05-27)
 
 
