@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import schedule, { Job } from 'node-schedule';
-import { CGMDataType, transform, validate, getLogger } from './utils';
+import { CGMDataType, getLogger, transform, validate } from './utils';
 
 const APPLICATION_ID = 'd89443d2-327c-4a6f-89e5-496bbb0317db';
 
@@ -9,7 +9,7 @@ type DexcomApiClientType = {
   password: string;
   server: 'US' | 'EU';
   clientOpts?: AxiosRequestConfig;
-  debug?: boolean;
+  debug: boolean;
 };
 
 export const DexcomApiClient = ({
@@ -42,17 +42,30 @@ export const DexcomApiClient = ({
 
     try {
       logger(`Trying to login with credentials ${username}:********`);
-      const responses = await Promise.all([
-        client.post('/General/AuthenticatePublisherAccount', payload),
-        client.post('/General/LoginPublisherAccountByName', payload),
-      ]);
+      const accountIdResponse = await client.post(
+        '/General/AuthenticatePublisherAccount',
+        payload
+      );
 
-      if (responses.some(e => !validate(e))) {
+      if (!validate(accountIdResponse) || !accountIdResponse.data) {
+        throw new Error('Unable to retrieve account id.');
+      }
+
+      const sessionResponse = await client.post(
+        '/General/LoginPublisherAccountById',
+        {
+          accountId: accountIdResponse.data,
+          password,
+          applicationId: APPLICATION_ID,
+        }
+      );
+
+      if (!validate(sessionResponse) || !sessionResponse.data) {
         logger('Login failed');
         throw new Error('Login failed.');
       }
 
-      sessionId = responses[1].data;
+      sessionId = sessionResponse.data;
     } catch (e) {
       throw new Error('Unable to login in');
     }
